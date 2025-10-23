@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c630c2244fd4f459e285a33fde292e, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  GroundedData:
+    BaseSpeed: 5
+    RayDistanceToFall: 1.4
+    SlopAngleSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.016666668
+        outSlope: -0.016666668
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 15
+        value: 0.75
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 55.1
+        value: 0.4
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 65.1
+        value: 0
+        inSlope: -0.02
+        outSlope: -0.02
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 90
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    RotateSpeed:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1.4160827
+        value: 8.373314
+        inSlope: 13.579686
+        outSlope: 13.579686
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.2468266
+      - serializedVersion: 3
+        time: 1.5
+        value: 10
+        inSlope: 18.9522
+        outSlope: 18.9522
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.26490837
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    DashData:
+      DashRotationTime: 0.02
+      DishModifer: 2.5
+      TimeToConsecutive: 1
+      DashLimit: 2
+      CoolDown: 2
+    BaseRotationData:
+      RotateTime: {x: 0, y: 0.14, z: 0}
+    BaseWalkData:
+      SpeedModifier: 0.25
+      BackWayCameraData:
+      - MinimunAngel: 80
+        MaximunAngel: 90
+        WaitTime: -1
+        RecentingTime: -1
+    IdleWalkData:
+      BackWayCameraData:
+      - MinimunAngel: 80
+        MaximunAngel: 90
+        WaitTime: 0.25
+        RecentingTime: 0.5
+    BaseRunData:
+      SpeedModifier: 1
+    BaseSprintData:
+      speedModifier: 1.7
+      SprintToRunTime: 2
+      RunToWalkTime: 0.5
+    BaseStopData:
+      LightDecelarateForce: 0.5
+      MediumDecelarateForce: 4.5
+      HardDecelarateForce: 1.5
+    BaseRollingData:
+      SpeedModifer: 1
+    SideWayCameraData:
+    - MinimunAngel: 0
+      MaximunAngel: 80
+      WaitTime: -1
+      RecentingTime: -1
+    - MinimunAngel: 80
+      MaximunAngel: 90
+      WaitTime: 0
+      RecentingTime: 0.3
+    BackWayCameraData:
+    - MinimunAngel: 80
+      MaximunAngel: 90
+      WaitTime: 0
+      RecentingTime: 0.5
+  AirbroneData:
+    playerJumpData:
+      PlayerRotationData: {x: 0, y: 0.02, z: 0}
+      JumpModifierOnSlophUpwards:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: -0.0125
+          outSlope: -0.0125
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 20
+          value: 0.75
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 35.1
+          value: 0.5
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 75.1
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 90
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      JumpModifierOnSlophDwonwards:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 20
+          value: 0.85
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 70.1
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 90
+          value: 1
+          inSlope: Infinity
+          outSlope: Infinity
+          tangentMode: 103
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      JumpToGroundDistance: 0
+      DecelerationForce: 0
+      StationAryForce: {x: 0, y: 5, z: 0}
+      WeakForce: {x: 1, y: 5, z: 1}
+      MediumForce: {x: 3, y: 5, z: 3}
+      StrongForce: {x: 5, y: 5, z: 5}
+    playerFallData:
+      LimitedFallData: 12
+      MinDisanceToHanrdStop: 3
+  PlayerAnimationData:
+    GrounedParameterName: Grounded
+    MovingParameterName: Moving
+    StoppingParameterName: Stopping
+    LandingParameterName: Landing
+    AirborneParameterName: Airborne
+    AttackParameterName: Attack
+    IdleParameterName: IsIdling
+    DashParameterName: IsDashing
+    WalkParameterName: IsWalking
+    RunParameterName: IsRuning
+    SprintParameterName: IsSprinting
+    MediumStopParameterName: IsMediumStopping
+    HardStopParameterName: IsHardStopping
+    RollParameterName: IsRolling
+    HardLandingParameterName: IsHardLanding
+    fallParameterName: Isfalling
+    Hit2ParameterName: IsHit2
+    Hit3ParameterName: IsHit3
+    GroundedParameterHash: 0
+    MovingParameterHash: 0
+    StopingParameterHash: 0
+    LandingParameterHash: 0
+    AirborneParameterHash: 0
+    IdleParameterHash: 0
+    DashParameterHash: 0
+    WalkParameterHash: 0
+    RunParameterHash: 0
+    SprintParameterHash: 0
+    MediumStopParameterHash: 0
+    HardStopParameterHash: 0
+    RollParameterHash: 0
+    HardLandingParameterHash: 0
+    fallParameterHash: 0
+    AttackParameterHash: 0
+    Hit2ParameterHash: 0
+    Hit3ParameterHash: 0
