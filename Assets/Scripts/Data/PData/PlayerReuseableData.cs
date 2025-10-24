@@ -15,7 +15,7 @@ public class PlayerReuseableData
     //Íæ¼Ò´¹Ö±Ðý×ª
     public float currenGroundTagetRotateAngle = 0;
     public float countTime;
-    public float PRatateSpeed = 1;
+    public float PRatateSpeed = 0.1f;
     public float BaseRatateSpeed = 1;
 
     public List<PlayerRecenteringCameraData> SideWayCameraData;

@@ -164,19 +164,20 @@ public class PlayerMovementState : Istate
         if (stateMachine.Player.Input.gamePlayActions.LRotate.ReadValue<float>() != 0)
         {
             stateMachine.ReuseableData.currenGroundTagetRotateAngle 
-            += GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime) * 0.1f;
-            //Debug.Log(stateMachine.ReuseableData.currenGroundTagetRotateAngle);
-            Debug.Log(stateMachine.ReuseableData.countTime);
-        }
-        else
-        {
-            stateMachine.ReuseableData.countTime = 0;
+            -= GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime) * 0.1f;
+            Debug.Log(GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime));
         }
 
-        if (stateMachine.Player.Input.gamePlayActions.RRotate.ReadValue<float>() == 1)
+        stateMachine.ReuseableData.countTime += Time.deltaTime;
+        if (stateMachine.Player.Input.gamePlayActions.RRotate.ReadValue<float>() != 0)
         {
-            stateMachine.ReuseableData.currenGroundTagetRotateAngle 
-             -= Time.deltaTime * Time.deltaTime * stateMachine.ReuseableData.PRatateSpeed + stateMachine.ReuseableData.BaseRatateSpeed;
+            stateMachine.ReuseableData.currenGroundTagetRotateAngle
+            += GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime) * 0.1f;
+        }
+        if(stateMachine.Player.Input.gamePlayActions.RRotate.ReadValue<float>() + stateMachine.Player.Input.gamePlayActions.LRotate.ReadValue<float>() 
+            == 0f && (stateMachine.Player.Input.gamePlayActions.RRotate.ReadValue<float>() + stateMachine.Player.Input.gamePlayActions.LRotate.ReadValue<float>() != 2f))
+        {
+            stateMachine.ReuseableData.countTime = 0;
         }
     }
 
@@ -243,7 +244,19 @@ public class PlayerMovementState : Istate
     //将四元数转换为向量
     protected Vector3 GetTargetRoatationDir(float directionAngle)
     {
-        return Quaternion.Euler(0f, directionAngle, 0f) * Vector3.forward;
+        if(stateMachine.ReuseableData.MovementInput.y > 0.1f)
+        {
+            return Quaternion.Euler(0f, directionAngle, 0f) * Vector3.up;
+        }
+        if (stateMachine.ReuseableData.MovementInput.y < -0.1f)
+        {
+            return Quaternion.Euler(0f, directionAngle, 0f) * Vector3.down;
+        }
+        else
+        {
+            return Quaternion.Euler(0f, directionAngle, 0f) * Vector3.forward;
+        }
+
     }
     //获取目标角度并平滑旋转
     protected float Rotate(Vector3 TargetDirection,bool IsRotate = true)
@@ -319,6 +332,10 @@ public class PlayerMovementState : Istate
     //添加旋转左右移动Offset
     private float AddRotateOffset(float angle)
     {
+        if (stateMachine.ReuseableData.MovementInput.y > 0.1f )
+        {
+            angle = 180 - angle; 
+        }
         if (stateMachine.ReuseableData.MovementInput == Vector2.right)
         {
             angle += 30;
@@ -356,7 +373,7 @@ public class PlayerMovementState : Istate
             Vector3 RotationDir = GetTargetRoatationDir(DirectionAngle);
 
             Vector3 CurrentV = stateMachine.Player.Rigidbody.linearVelocity;
-            CurrentV.y = 0f;
+           
             stateMachine.Player.Rigidbody.AddForce(RotationDir * MovementSpeed - CurrentV, ForceMode.VelocityChange);
         }
 
