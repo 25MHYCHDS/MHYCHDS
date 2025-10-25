@@ -19,22 +19,17 @@ public class PlayerLightAttackingState : PlayerGroundedState
         stateMachine.ReuseableData.CanNextAttack = false;
 
         StartAnimation(stateMachine.Player.animationData.AttackParameterHash);
-        if (stateMachine.ReuseableData.LeftMouseClicks == 1)
-        {
-            AddForce(8);
-        }
+
         if (stateMachine.ReuseableData.LeftMouseClicks == 2)
         {
             StartAnimation(stateMachine.Player.animationData.Hit2ParameterHash);
             stateMachine.ReuseableData.CanNextAttack = false;
-            AddForce(2);
         }
         if (stateMachine.ReuseableData.LeftMouseClicks == 3)
         {
             StartAnimation(stateMachine.Player.animationData.Hit3ParameterHash);
             stateMachine.ReuseableData.LeftMouseClicks = 0;
             stateMachine.ReuseableData.CanNextAttack = false;
-            AddForce(2);
         }
     }
 
@@ -48,7 +43,7 @@ public class PlayerLightAttackingState : PlayerGroundedState
     public override void PhysicsUpdate()
     {
         Float();
-        UpdateTargetRotateData(0f);
+        //UpdateTargetRotateData(0f);
 
         if (!IsMovingHorizontal())
         {
@@ -83,26 +78,15 @@ public class PlayerLightAttackingState : PlayerGroundedState
         base.UpdateTargetRotateData(TargetAngle);
     }
 
-    public void AddForce(float force)
+    public Vector3 GetTargetDirection()
     {
-        Vector3 AttackDir = new Vector3(GetTargetDirection().x, 0f, GetTargetDirection().y).normalized;
-        if (CameraManager.instance.IsAiming)
+        Vector3 TargetDirection =  stateMachine.Player.transform.forward;
+        if (CameraManager.instance.EnemyLookPoint != null)
         {
-            AttackDir = stateMachine.Player.transform.forward;
-        }
-        else
-        {
-            AttackDir = new Vector3(GetTargetDirection().x, 0f, GetTargetDirection().y).normalized;
-        }
-
-        stateMachine.Player.Rigidbody.linearVelocity = AttackDir * force;
-    }
-
-    public Vector2 GetTargetDirection()
-    {
-        Vector3 thirdDDir = CameraManager.instance.GetTargetDirection(CameraManager.instance.EnemyLookPoint.transform.localToWorldMatrix.GetPosition(),
+            Vector3 thirdDDir = CameraManager.instance.GetTargetDirection(CameraManager.instance.EnemyLookPoint.transform.localToWorldMatrix.GetPosition(),
             Player.instance.transform.position);
-        Vector2 TargetDirection = new Vector2(thirdDDir.x, thirdDDir.z);
+            TargetDirection = new Vector3(thirdDDir.x,0f, thirdDDir.z);
+        }
 
         return TargetDirection;
     }

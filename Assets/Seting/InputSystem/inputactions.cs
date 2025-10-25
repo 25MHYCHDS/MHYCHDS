@@ -107,6 +107,15 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeC"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa3a0c10-4f4b-479c-8359-b8da86cef099"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -393,6 +402,17 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2235d7c-3541-404f-aea2-660c956bf601"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -989,6 +1009,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         m_GamePlay_LightAttack = m_GamePlay.FindAction("LightAttack", throwIfNotFound: true);
         m_GamePlay_LRotate = m_GamePlay.FindAction("LRotate", throwIfNotFound: true);
         m_GamePlay_RRotate = m_GamePlay.FindAction("RRotate", throwIfNotFound: true);
+        m_GamePlay_ChangeC = m_GamePlay.FindAction("ChangeC", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1077,6 +1098,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_LightAttack;
     private readonly InputAction m_GamePlay_LRotate;
     private readonly InputAction m_GamePlay_RRotate;
+    private readonly InputAction m_GamePlay_ChangeC;
     public struct GamePlayActions
     {
         private @Inputactions m_Wrapper;
@@ -1090,6 +1112,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_GamePlay_LightAttack;
         public InputAction @LRotate => m_Wrapper.m_GamePlay_LRotate;
         public InputAction @RRotate => m_Wrapper.m_GamePlay_RRotate;
+        public InputAction @ChangeC => m_Wrapper.m_GamePlay_ChangeC;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1126,6 +1149,9 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
             @RRotate.started += instance.OnRRotate;
             @RRotate.performed += instance.OnRRotate;
             @RRotate.canceled += instance.OnRRotate;
+            @ChangeC.started += instance.OnChangeC;
+            @ChangeC.performed += instance.OnChangeC;
+            @ChangeC.canceled += instance.OnChangeC;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1157,6 +1183,9 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
             @RRotate.started -= instance.OnRRotate;
             @RRotate.performed -= instance.OnRRotate;
             @RRotate.canceled -= instance.OnRRotate;
+            @ChangeC.started -= instance.OnChangeC;
+            @ChangeC.performed -= instance.OnChangeC;
+            @ChangeC.canceled -= instance.OnChangeC;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1348,6 +1377,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnLRotate(InputAction.CallbackContext context);
         void OnRRotate(InputAction.CallbackContext context);
+        void OnChangeC(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

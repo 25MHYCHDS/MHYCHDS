@@ -49,9 +49,12 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        IsAiming = Vector3.Distance(EnemyLookPoint.transform.localToWorldMatrix.GetPosition(), Player.instance.transform.position) > MaxDistance;
-        EnemyScreenP = new Vector2(Camera.main.WorldToScreenPoint(EnemyLookPoint.transform.localToWorldMatrix.GetPosition()).x,
-        Camera.main.WorldToScreenPoint(EnemyLookPoint.transform.localToWorldMatrix.GetPosition()).y);
+        if(EnemyLookPoint != null)
+        {
+            IsAiming = Vector3.Distance(EnemyLookPoint.transform.localToWorldMatrix.GetPosition(), Player.instance.transform.position) > MaxDistance;
+            EnemyScreenP = new Vector2(Camera.main.WorldToScreenPoint(EnemyLookPoint.transform.localToWorldMatrix.GetPosition()).x,
+            Camera.main.WorldToScreenPoint(EnemyLookPoint.transform.localToWorldMatrix.GetPosition()).y);
+        }
 
         if (IsAiming)
         {

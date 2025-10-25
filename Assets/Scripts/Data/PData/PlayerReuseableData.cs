@@ -25,6 +25,7 @@ public class PlayerReuseableData
     public bool ShouldWalk = false;
     public bool ShouldSprint = false;
     public bool CanNextAttack = true;
+    public bool CanChageCharacter = false;
 
     public Vector3 currenTagetDri;
     public Vector3 rotationTime;

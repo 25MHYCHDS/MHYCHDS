@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -56,7 +57,7 @@ public class PlayerMovementState : Istate
 
     public virtual void Update()
     {
-
+        JudgeChange();
     }
     public virtual void OnAnimationEnterEvent()
     {
@@ -78,6 +79,10 @@ public class PlayerMovementState : Istate
         {
             OnContractWithGround();
             return;
+        }
+        if(collider.CompareTag("Character"))
+        {
+            stateMachine.ReuseableData.CanChageCharacter = true;
         }
     }
     public void OnTriggerExit(Collider collider)
@@ -165,7 +170,6 @@ public class PlayerMovementState : Istate
         {
             stateMachine.ReuseableData.currenGroundTagetRotateAngle 
             -= GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime) * 0.1f;
-            Debug.Log(GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime));
         }
 
         stateMachine.ReuseableData.countTime += Time.deltaTime;
@@ -211,6 +215,42 @@ public class PlayerMovementState : Istate
         stateMachine.Player.Input.gamePlayActions.RRotate.performed -= OnRRatatePerfermed;
 
     }
+
+
+    protected virtual void JudgeChange()
+    {
+        if (stateMachine.ReuseableData.CanChageCharacter)
+        {
+            stateMachine.Player.Input.gamePlayActions.ChangeC.started += OnChangeC1Start;
+
+        }
+        stateMachine.ReuseableData.CanChageCharacter = false;
+    }
+
+    protected virtual void OnChangeC1Start(InputAction.CallbackContext context)
+    {
+        Player.instance.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        Player.instance.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
+        Player.instance.Animator = Player.instance.GetComponentInChildren<Animator>();
+
+        stateMachine.ChangeState(stateMachine.IdlingState);
+
+        stateMachine.Player.Input.gamePlayActions.ChangeC.started -= OnChangeC1Start;
+    }
+
+    protected virtual void OnChangeC2Start(InputAction.CallbackContext context)
+    {
+        Player.instance.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        Player.instance.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+        Player.instance.Animator = Player.instance.GetComponentInChildren<Animator>();
+
+        stateMachine.ChangeState(stateMachine.IdlingState);
+
+        stateMachine.Player.Input.gamePlayActions.ChangeC.started -= OnChangeC2Start;
+    }
+
     protected virtual void OnwalkToggleStart(InputAction.CallbackContext context)
     {
         stateMachine.ReuseableData.ShouldWalk = !stateMachine.ReuseableData.ShouldWalk;
