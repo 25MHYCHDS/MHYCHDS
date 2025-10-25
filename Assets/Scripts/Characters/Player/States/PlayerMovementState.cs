@@ -80,9 +80,9 @@ public class PlayerMovementState : Istate
             OnContractWithGround();
             return;
         }
-        if(collider.CompareTag("Character"))
+        if(collider.CompareTag("Character") || collider.CompareTag("Character2"))
         {
-            stateMachine.ReuseableData.CanChageCharacter = true;
+            stateMachine.ReuseableData.ChagedCharacter = collider.tag;
         }
     }
     public void OnTriggerExit(Collider collider)
@@ -219,12 +219,15 @@ public class PlayerMovementState : Istate
 
     protected virtual void JudgeChange()
     {
-        if (stateMachine.ReuseableData.CanChageCharacter)
+        if (stateMachine.ReuseableData.ChagedCharacter == "Character")
         {
             stateMachine.Player.Input.gamePlayActions.ChangeC.started += OnChangeC1Start;
-
         }
-        stateMachine.ReuseableData.CanChageCharacter = false;
+        if (stateMachine.ReuseableData.ChagedCharacter == "Character2")
+        {
+            stateMachine.Player.Input.gamePlayActions.ChangeC.started += OnChangeC2Start;
+        }
+        stateMachine.ReuseableData.ChagedCharacter = "";
     }
 
     protected virtual void OnChangeC1Start(InputAction.CallbackContext context)
