@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerLightAttackingState : PlayerGroundedState    
 {
+    private bool IsAiming = false;
+    public float MaxDistance = 20;
     public PlayerLightAttackingState(PlayerMoveStateMachine moveStateMachine) : base(moveStateMachine)
     {
     }
@@ -11,6 +13,14 @@ public class PlayerLightAttackingState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
+        IsAiming = Vector3.Distance(CameraManager.instance.EnemyLookPoint.transform.position, Player.instance.transform.position) < MaxDistance;
+
+        if (IsAiming)
+        {
+            UpdateTargetRotateData(0f);
+        }
+
         stateMachine.ReuseableData.DecelerateModifier = GroundedData.BaseStopData.HardDecelarateForce;
         stateMachine.ReuseableData.MovementSpeedModifier = stateMachine.ReuseableData.MovementSpeedModifier / 3;
 
@@ -19,31 +29,40 @@ public class PlayerLightAttackingState : PlayerGroundedState
         stateMachine.ReuseableData.CanNextAttack = false;
 
         StartAnimation(stateMachine.Player.animationData.AttackParameterHash);
-
+        if (stateMachine.ReuseableData.LeftMouseClicks == 1)
+        {
+            AddForce(20);
+        }
         if (stateMachine.ReuseableData.LeftMouseClicks == 2)
         {
             StartAnimation(stateMachine.Player.animationData.Hit2ParameterHash);
             stateMachine.ReuseableData.CanNextAttack = false;
+            AddForce(20);
         }
         if (stateMachine.ReuseableData.LeftMouseClicks == 3)
         {
             StartAnimation(stateMachine.Player.animationData.Hit3ParameterHash);
             stateMachine.ReuseableData.LeftMouseClicks = 0;
             stateMachine.ReuseableData.CanNextAttack = false;
+            AddForce(20);
         }
     }
 
     public override void Update()
     {
-
+        IsAiming = Vector3.Distance(CameraManager.instance.EnemyLookPoint.transform.position, Player.instance.transform.position) < MaxDistance;
     }
 
     
 
     public override void PhysicsUpdate()
     {
+        ERotate();
         Float();
-        //UpdateTargetRotateData(0f);
+        if (IsAiming)
+        {
+            UpdateTargetRotateData(0f);
+        }
 
         if (!IsMovingHorizontal())
         {
@@ -61,21 +80,30 @@ public class PlayerLightAttackingState : PlayerGroundedState
         stateMachine.ReuseableData.CanNextAttack = true;
     }
 
+        public void AddForce(float force)
+    {
+        Vector3 AttackDir = new Vector3(GetTargetDirection().x, 0f, GetTargetDirection().y).normalized;
+        if (!IsAiming)
+        {
+            AttackDir = stateMachine.Player.transform.forward;
+        }
+        else
+        {
+            AttackDir = new Vector3(GetTargetDirection().x, 0f, GetTargetDirection().y).normalized;
+        }
+
+        stateMachine.Player.Rigidbody.linearVelocity = AttackDir * force;
+    }
+
     protected override void UpdateTargetRotateData(float TargetAngle)
     {
-        if (!CameraManager.instance.CameraAimCoolDown)
-        {
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length != 0)
+            if (CameraManager.instance.EnemyLookPoint != null)
             {
-                GameObject enemy = GameObject.FindGameObjectsWithTag("Enemy")[0];
-
                 float DirectionAngle = Mathf.Atan2(GetTargetDirection().x, GetTargetDirection().y) * Mathf.Rad2Deg;
                 stateMachine.ReuseableData.currenTagetDri.y = DirectionAngle;
                 stateMachine.ReuseableData.rotationPassedTime.y = 0f;
             }
             RotateToTagetDri();
-        }
-        base.UpdateTargetRotateData(TargetAngle);
     }
 
     public Vector3 GetTargetDirection()
