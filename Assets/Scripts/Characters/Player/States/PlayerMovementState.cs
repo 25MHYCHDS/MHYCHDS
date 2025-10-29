@@ -196,7 +196,10 @@ public class PlayerMovementState : Istate
         stateMachine.Player.Input.gamePlayActions.Move.performed += OnMovementPerfermed;
 
         stateMachine.Player.Input.gamePlayActions.LRotate.performed += OnLRatatePerfermed;
+
         stateMachine.Player.Input.gamePlayActions.RRotate.performed += OnRRatatePerfermed;
+
+        stateMachine.Player.Input.gamePlayActions.Dash.started += OnDashStart;
     }
     protected void ReadMovementInput()
     {
@@ -212,7 +215,10 @@ public class PlayerMovementState : Istate
         stateMachine.Player.Input.gamePlayActions.Move.performed -= OnMovementPerfermed;
 
         stateMachine.Player.Input.gamePlayActions.LRotate.performed -= OnLRatatePerfermed;
+
         stateMachine.Player.Input.gamePlayActions.RRotate.performed -= OnRRatatePerfermed;
+
+        stateMachine.Player.Input.gamePlayActions.Dash.started -= OnDashStart;
 
     }
 
@@ -242,6 +248,11 @@ public class PlayerMovementState : Istate
         stateMachine.Player.Input.gamePlayActions.ChangeC.started -= OnChangeC1Start;
     }
 
+    private void OnDashStart(InputAction.CallbackContext context)
+    {
+        stateMachine.ChangeState(stateMachine.DashState);
+    }
+
     protected virtual void OnChangeC2Start(InputAction.CallbackContext context)
     {
         Player.instance.gameObject.transform.GetChild(1).gameObject.SetActive(false);
@@ -266,6 +277,7 @@ public class PlayerMovementState : Istate
     {
         UpdateCameraRececnter(stateMachine.ReuseableData.MovementInput);
     }
+
     private void OnMovementPerfermed(InputAction.CallbackContext context)
     {
         UpdateCameraRececnter(context.ReadValue<Vector2>());

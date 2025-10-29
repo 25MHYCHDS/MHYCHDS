@@ -176,21 +176,27 @@ public class PlayerGroundedState : PlayerMovementState
             CameraManager.instance.Focus = true;
             if (stateMachine.ReuseableData.CanNextAttack)
             {
-                stateMachine.ChangeState(stateMachine.LightAttackStates);
+                Attack();
             }
-        }
-        if (InputBuffer.instance.ConsumInputBuffer(InputType.Jump))
-        {
-            stateMachine.ChangeState(stateMachine.JumpingStates);
         }
     }
 
     protected virtual void OnLightAttack(InputAction.CallbackContext context)
     {
-        CameraManager.instance.Focus = true;
-        if (stateMachine.ReuseableData.CanNextAttack)
+        Attack();
+    }
+    protected void Attack()
+    {
+        if (stateMachine.ReuseableData.CanNextAttack && Stamina.instance.CheckCanAction(0.5f))
         {
+
+            Stamina.instance.stamina -= 0.5f;
+            Stamina.instance.RecoverStamina = false;
             stateMachine.ChangeState(stateMachine.LightAttackStates);
+        }
+        else
+        {
+
         }
     }
 }

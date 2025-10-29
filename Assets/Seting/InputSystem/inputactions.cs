@@ -116,6 +116,15 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f6cacd6-e4eb-4677-bf99-a71fad009518"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -413,6 +422,17 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChangeC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97093cc6-86d9-4a67-a89c-6b4f0f96e151"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1010,6 +1030,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         m_GamePlay_LRotate = m_GamePlay.FindAction("LRotate", throwIfNotFound: true);
         m_GamePlay_RRotate = m_GamePlay.FindAction("RRotate", throwIfNotFound: true);
         m_GamePlay_ChangeC = m_GamePlay.FindAction("ChangeC", throwIfNotFound: true);
+        m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1099,6 +1120,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_LRotate;
     private readonly InputAction m_GamePlay_RRotate;
     private readonly InputAction m_GamePlay_ChangeC;
+    private readonly InputAction m_GamePlay_Dash;
     public struct GamePlayActions
     {
         private @Inputactions m_Wrapper;
@@ -1113,6 +1135,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         public InputAction @LRotate => m_Wrapper.m_GamePlay_LRotate;
         public InputAction @RRotate => m_Wrapper.m_GamePlay_RRotate;
         public InputAction @ChangeC => m_Wrapper.m_GamePlay_ChangeC;
+        public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1152,6 +1175,9 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
             @ChangeC.started += instance.OnChangeC;
             @ChangeC.performed += instance.OnChangeC;
             @ChangeC.canceled += instance.OnChangeC;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1186,6 +1212,9 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
             @ChangeC.started -= instance.OnChangeC;
             @ChangeC.performed -= instance.OnChangeC;
             @ChangeC.canceled -= instance.OnChangeC;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1378,6 +1407,7 @@ public partial class @Inputactions: IInputActionCollection2, IDisposable
         void OnLRotate(InputAction.CallbackContext context);
         void OnRRotate(InputAction.CallbackContext context);
         void OnChangeC(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

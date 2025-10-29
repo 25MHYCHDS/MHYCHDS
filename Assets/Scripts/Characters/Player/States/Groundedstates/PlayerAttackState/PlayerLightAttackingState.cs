@@ -144,9 +144,6 @@ public class PlayerLightAttackingState : PlayerGroundedState
     {
         InputBuffer.instance.AddInputBuffer(InputType.Attack);
 
-        if (stateMachine.ReuseableData.CanNextAttack == true)
-        {
-            stateMachine.ChangeState(stateMachine.IdlingState);
-        }
+        Attack();
     }
 }

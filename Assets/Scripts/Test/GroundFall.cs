@@ -7,9 +7,10 @@ public class GroundFall : MonoBehaviour
     public static GroundFall instance;
 
     public float Speed = 20;
+    public float acceleration = 3f;
+    public float MaxSpeed;
     public float RotateSpeed = 20;
 
-    private GameObject ground;
     private float rotationVelocity;
     private float rotationPassedTime;
     private PlayerMoveStateMachine stateMachine;
@@ -24,7 +25,6 @@ public class GroundFall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        ground = GetComponent<GameObject>();
     }
 
     private void Start()
@@ -39,6 +39,11 @@ public class GroundFall : MonoBehaviour
         transform.position = targetP;
 
         RotateToTagetDri();
+
+        if (Speed < MaxSpeed)
+        {
+            Speed += Time.deltaTime * acceleration;
+        }
     }
 
     //平滑旋转到Data中的目标角度

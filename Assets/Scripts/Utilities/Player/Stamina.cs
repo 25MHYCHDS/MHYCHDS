@@ -1,12 +1,24 @@
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class Stamina : MonoBehaviour
 {
     public float stamina = 10f;
-    void Start()
-    {
+    public static Stamina instance;
 
+    public bool RecoverStamina = true;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -14,7 +26,10 @@ public class Stamina : MonoBehaviour
     {
         stamina = Mathf.Clamp(stamina, 0f, 10f);
 
-        stamina += Time.deltaTime;
+        if (RecoverStamina)
+        {
+            stamina += Time.deltaTime;
+        }
     }
 
     public bool CheckCanAction(float Consum)
@@ -22,12 +37,19 @@ public class Stamina : MonoBehaviour
         if(stamina - Consum > 0)
         {
             stamina -= Consum;
+
+            StartCoroutine("CanRecover");
             return true;
         }
         else
         {
             return false;
         }
+    }
 
+    IEnumerator CanRecover()
+    {
+        yield return new WaitForSeconds(1f);
+        RecoverStamina = true;
     }
 }
