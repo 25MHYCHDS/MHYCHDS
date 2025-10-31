@@ -17,9 +17,14 @@ public class EnemyCatch : MonoBehaviour
         if (CanR)
         {
             float SmoothingAngleZ = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z,
-       0f, ref rotationVelocity, 0.2f);
+            0f, ref rotationVelocity, 0.2f);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, SmoothingAngleZ);
+
+            if(Vector3.Distance(transform.position, Player.instance.transform.position) > 1)
+            transform.position = Vector3.MoveTowards(transform.position
+            , Player.instance.transform.position , Time.deltaTime * 0.7f);
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
