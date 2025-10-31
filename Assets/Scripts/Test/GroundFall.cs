@@ -30,6 +30,7 @@ public class GroundFall : MonoBehaviour
     private void Start()
     {
         stateMachine = Player.instance.moveStateMachine;
+
     }
 
     void Update()

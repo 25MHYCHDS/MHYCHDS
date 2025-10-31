@@ -139,7 +139,7 @@ SubShader {
             UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
             float3 rotated = RotateAroundYInDegrees(v.vertex, _Rotation);
-            rotated = DoTwistX(rotated,90);
+            rotated = DoTwistX(rotated,-90);
             rotated = DoTwistZ(rotated,_RotationZ);
 
             o.vertex = UnityObjectToClipPos(rotated);
