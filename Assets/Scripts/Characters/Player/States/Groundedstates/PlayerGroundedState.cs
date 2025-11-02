@@ -67,11 +67,6 @@ public class PlayerGroundedState : PlayerMovementState
 
         Ray RayFromCapsuleColiderButton = new Ray(CapsuleColiderCenterInWorld - 
             stateMachine.Player.coliderFloat.CColiderD.ColliderVerticalExtent, Vector3.down);
-        if(!Physics.Raycast(RayFromCapsuleColiderButton,out _,GroundedData.RayDistanceToFall, 
-            stateMachine.Player.playerLayerData.GroundLayer, QueryTriggerInteraction.Ignore))
-        {
-            OnFall();
-        }
     }
 
     private bool IsThereGroundUnderNearth()
@@ -86,10 +81,6 @@ public class PlayerGroundedState : PlayerMovementState
 
     }
 
-    protected virtual void OnFall()
-    {
-        stateMachine.ChangeState(stateMachine.FallingStates);
-    }
     private void UpdateShoudKeepSprint()
     {
         if (!stateMachine.ReuseableData.ShouldSprint) 

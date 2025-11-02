@@ -77,7 +77,9 @@ public class PlayerMovementState : Istate
     {
         if (stateMachine.Player.playerLayerData.IsGroundLayer(collider.gameObject.layer))
         {
-            OnContractWithGround();
+            Debug.Log("受到1点伤害");
+            CameraShake.instance.StartShake();
+            HurtRedScreen.instance.PlayEffect();
             return;
         }
         if(collider.CompareTag("Character") || collider.CompareTag("Character2"))
@@ -172,7 +174,6 @@ public class PlayerMovementState : Istate
             -= GroundedData.RotateSpeed.Evaluate(stateMachine.ReuseableData.countTime) * 0.1f;
         }
 
-        stateMachine.ReuseableData.countTime += Time.deltaTime;
         if (stateMachine.Player.Input.gamePlayActions.RRotate.ReadValue<float>() != 0)
         {
             stateMachine.ReuseableData.currenGroundTagetRotateAngle

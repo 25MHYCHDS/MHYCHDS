@@ -30,7 +30,7 @@ public class GroundFall : MonoBehaviour
     private void Start()
     {
         stateMachine = Player.instance.moveStateMachine;
-
+        stateMachine.ReuseableData.currenGroundTagetRotateAngle -= 0.1f;
     }
 
     void Update()

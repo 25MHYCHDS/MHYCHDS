@@ -93,7 +93,6 @@ public class InputBuffer :MonoBehaviour
     public class BuffSlot
     {
         [SerializeField] public float BufferTime = 0.2f;
-        private float timer = 0f;
         public bool Buffered = false;
         public float Timer = 0f;
     }

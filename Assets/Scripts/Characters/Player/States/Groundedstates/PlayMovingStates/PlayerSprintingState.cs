@@ -71,11 +71,7 @@ public class PlayerSprintingState : PlayerMovingState
 
         stateMachine.ChangeState(stateMachine.RuningState);
     }
-    protected override void OnFall()
-    {
-        ShoudResetSprintState =false;
-        base.OnFall();
-    }
+
     // ‰»Î
     private void OnSprintPerformed(InputAction.CallbackContext context)
     {
