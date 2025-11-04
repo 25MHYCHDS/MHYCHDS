@@ -58,7 +58,6 @@ public class PlayerLightAttackingState : PlayerGroundedState
     public override void PhysicsUpdate()
     {
         ERotate();
-        Float();
         if (IsAiming)
         {
             UpdateTargetRotateData(0f);

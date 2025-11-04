@@ -34,9 +34,6 @@ public class Player : MonoBehaviour
 
         Animator = GetComponentInChildren<Animator>();
 
-        coliderFloat.Initialize(gameObject);
-        coliderFloat.CalculateDimension();
-
         cameraUtility.Initialize();
         animationData.Initialize();
 
@@ -47,8 +44,7 @@ public class Player : MonoBehaviour
     }
     private void OnValidate()
     {
-        coliderFloat.Initialize(gameObject);
-        coliderFloat.CalculateDimension();
+
     }
     private void Start()
     {

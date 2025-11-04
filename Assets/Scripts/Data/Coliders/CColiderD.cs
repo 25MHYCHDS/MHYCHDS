@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class CColiderD 
 {
-    public CapsuleCollider Pcollider;
+    public BoxCollider Pcollider;
     public Vector3 ColliderCenter;
     public Vector3 ColliderVerticalExtent;
     public void Initialize(GameObject gameObject)
@@ -15,8 +15,8 @@ public class CColiderD
         {
             return;
         }
-        Pcollider = new CapsuleCollider();
-        Pcollider = gameObject.GetComponent<CapsuleCollider>();
+        Pcollider = new BoxCollider();
+        Pcollider = gameObject.GetComponent<BoxCollider>();
 
     }
     public void UpdataColliderCenter()

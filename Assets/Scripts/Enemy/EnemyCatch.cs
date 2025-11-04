@@ -20,7 +20,7 @@ public class EnemyCatch : MonoBehaviour
             0f, ref rotationVelocity, 0.2f);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, SmoothingAngleZ);
 
-            if(Vector3.Distance(transform.position, Player.instance.transform.position) > 1)
+            if(Vector3.Distance(transform.position, Player.instance.transform.position) > 1f)
             transform.position = Vector3.MoveTowards(transform.position
             , Player.instance.transform.position , Time.deltaTime * 0.7f);
         }

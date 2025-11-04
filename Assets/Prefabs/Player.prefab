@@ -49,7 +49,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.25, y: 0.2, z: 0.25}
   m_Center: {x: 0, y: 0.1, z: 0}
@@ -96,11 +96,11 @@ GameObject:
   - component: {fileID: 8547784960232444872}
   - component: {fileID: 4551711402373790374}
   - component: {fileID: 156315453908336909}
-  - component: {fileID: 6284142559490085526}
   - component: {fileID: 2945678855654346615}
+  - component: {fileID: 1590874230350236184}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127439130651372158}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9999839, z: -0, w: 0.0056843217}
+  m_LocalRotation: {x: 0, y: -0.99998385, z: 0, w: 0.005681147}
   m_LocalPosition: {x: -36.140865, y: -5.67, z: -1556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -157,9 +157,6 @@ MonoBehaviour:
       SlopHighP: 0.55
       RayDistance: 1.3
       ReachPForce: 25
-    PlayerTriggerColiderData:
-      GroundCheckColider: {fileID: 2101066391204453374}
-      GroundedCheckColliderExtents: {x: 0, y: 0, z: 0}
   playerLayerData:
     GroundLayer:
       serializedVersion: 2
@@ -210,29 +207,6 @@ MonoBehaviour:
   Rigidbody: {fileID: 2945678855654346615}
   Animator: {fileID: 4909818221211991275}
   MainCameraTransform: {fileID: 0}
---- !u!136 &6284142559490085526
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127439130651372158}
-  m_Material: {fileID: 13400000, guid: 0afba0ce661524d4f81e42a0c96fdf8b, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.37
-  m_Height: 1.1609999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.7095, z: 0}
 --- !u!54 &2945678855654346615
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -257,9 +231,30 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!65 &1590874230350236184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127439130651372158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.80747986, y: 1.9343454, z: 0.7279053}
+  m_Center: {x: 0.078681946, y: 0.46717268, z: -0.010070801}
 --- !u!1 &1788254530572306832
 GameObject:
   m_ObjectHideFlags: 0
