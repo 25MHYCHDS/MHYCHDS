@@ -78,6 +78,7 @@ public class PlayerMovementState : Istate
         if (stateMachine.Player.playerLayerData.IsGroundLayer(collider.gameObject.layer))
         {
             Debug.Log("受到1点伤害");
+            PlayerHealthContainer.instance.SetHealth(Player.instance.moveStateMachine.ReuseableData.PlayerDefaultHealth--)
             CameraShake.instance.StartShake();
             HurtRedScreen.instance.PlayEffect();
             return;
@@ -388,7 +389,7 @@ public class PlayerMovementState : Istate
     //添加旋转左右移动Offset
     private float AddRotateOffset(float angle)
     {
-        if (stateMachine.ReuseableData.MovementInput.y > 0.1f )
+        if (stateMachine.ReuseableData.MovementInput.y > 0.1f || !stateMachine.ReuseableData.IsLevel0)
         {
             angle = 180 - angle; 
         }

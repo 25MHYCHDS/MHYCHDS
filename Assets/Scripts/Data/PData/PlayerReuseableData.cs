@@ -11,6 +11,8 @@ public class PlayerReuseableData
     public float LastClickTime;
     public float MaxComboDelay = 2f;
     public int LeftMouseClicks = 0;
+    public int PlayerDefaultHealth = 5;
+    public int CurrentHealth = 5;
 
     //Íæ¼Ò´¹Ö±Ðý×ª
     public float currenGroundTagetRotateAngle = 0;
@@ -25,6 +27,7 @@ public class PlayerReuseableData
     public bool ShouldWalk = false;
     public bool ShouldSprint = false;
     public bool CanNextAttack = true;
+    public bool IsLevel0 = false;
     public string ChagedCharacter;
 
     public Vector3 currenTagetDri;
