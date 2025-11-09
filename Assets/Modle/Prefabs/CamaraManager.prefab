@@ -48,8 +48,8 @@ MonoBehaviour:
   CameraAimCoolDown: 0
   Focus: 0
   IsAiming: 0
-  AimWaitTime: 10000
-  MaxDistance: 10000
+  AimWaitTime: 0.2
+  MaxDistance: 30
   OffsetTime: 0.1
   CameraAimTime: 0.1
-  MaxMouseDelta: 10000
+  MaxMouseDelta: 15

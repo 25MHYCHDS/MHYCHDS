@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     public PlayerMoveStateMachine moveStateMachine;
 
-    public ParticleSystem AtteackEffect;
+    public Transform AtteackEffect;
 
     public static Player instance;
     private void Awake()

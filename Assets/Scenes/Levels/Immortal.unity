@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicSounds:
   - Name: bgm
-    Clip: {fileID: 8300000, guid: 6302915b1507a7c419f155bc4e85bf24, type: 3}
+    Clip: {fileID: 8300000, guid: 995f6c9dc937d0d4bb211b8ccc679cae, type: 3}
   SfxSounds: []
   MusicSource: {fileID: 921814454}
   SfxSource: {fileID: 1714960602}

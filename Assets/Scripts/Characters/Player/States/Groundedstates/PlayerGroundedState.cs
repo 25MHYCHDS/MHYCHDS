@@ -119,7 +119,7 @@ public class PlayerGroundedState : PlayerMovementState
         if (stateMachine.ReuseableData.CanNextAttack && Stamina.instance.CheckCanAction(0.5f))
         {
 
-            Stamina.instance.stamina -= 0.5f;
+            Stamina.instance.stamina -= 1f;
             Stamina.instance.RecoverStamina = false;
             stateMachine.ChangeState(stateMachine.LightAttackStates);
         }

@@ -89,7 +89,10 @@ public class PlayerMovementState : Istate
             {
                 return;
             }
+            SoundManager.instance.PlaySfx("Pong");
+
             PlayerHealthContainer.instance.SetHealth(PlayerHealthContainer.instance.health - 1);
+
             CameraShake.instance.StartShake();
             HurtRedScreen.instance.PlayEffect();
 

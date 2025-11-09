@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     public Sound[] MusicSounds, SfxSounds;
-    public AudioSource MusicSource, SfxSource;
+    public AudioSource MusicSource, SfxSource,ESfxSource;
     private void Awake()
     {
     if (instance == null)
@@ -23,12 +23,12 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(MusicSounds[0].Name);
+        repeatTheme();
     }
 
     public void repeatTheme()
     {
-        InvokeRepeating("PlayTheme", 0f, 197f);
+        InvokeRepeating("PlayTheme", 0f, 98f);
     }
 
     private void PlayTheme()
@@ -60,6 +60,20 @@ public class SoundManager : MonoBehaviour
         {
             SfxSource.clip = s.Clip;
             SfxSource.Play();
+        }
+    }
+
+    public void PlayESfx(string name)
+    {
+        Sound s = Array.Find(SfxSounds, x => x.Name == name);
+        if (s == null)
+        {
+            Debug.Log("无法找到音效");
+        }
+        else
+        {
+            ESfxSource.clip = s.Clip;
+            ESfxSource.Play();
         }
     }
 }

@@ -21,6 +21,8 @@ public class EnemyHealthContainer : HealthContainer
         {
             SetHealth(EnemyHealth - 1);
             EnemyHealthContainer.instance.GetComponent<Animator>().SetBool("Damage", true);
+
+            SoundManager.instance.PlayESfx("D");
         }
     }
     protected override void InitHealth()
@@ -30,19 +32,9 @@ public class EnemyHealthContainer : HealthContainer
     protected override void Die()
     {
         Debug.Log($"Enemy {gameObject.name} is dead");
-
-        if(e2p != null)
-        {
-            gameObject.transform.SetParent(e2p.transform, false);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-
+        SoundManager.instance.PlayESfx("Win1");
         PlayerHealthContainer.instance.SetHealth(5);
-        EnemyCatch.instance.HealthUI.SetActive(false);
+
         SetHealth(10);
-        //SoundManager.instance.PlaySfx("Victory");
     }
 }

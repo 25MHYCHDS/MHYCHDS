@@ -28,7 +28,7 @@ public class Stamina : MonoBehaviour
 
         if (RecoverStamina)
         {
-            stamina += Time.deltaTime * 2;
+            stamina += Time.deltaTime * 1.5f;
         }
     }
 

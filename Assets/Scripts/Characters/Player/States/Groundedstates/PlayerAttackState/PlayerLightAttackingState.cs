@@ -60,7 +60,7 @@ public class PlayerLightAttackingState : PlayerGroundedState
         {
             Dtimer += Time.deltaTime;
 
-            if (Dtimer > 0.3f)
+            if (Dtimer > 0.5f)
             {
                 stateMachine.ReuseableData.CanBeDamged = true;
                 Dtimer = 0f;

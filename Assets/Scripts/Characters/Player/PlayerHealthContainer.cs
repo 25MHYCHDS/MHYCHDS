@@ -8,6 +8,7 @@ public class PlayerHealthContainer : HealthContainer
 
     private void Awake()
     {
+        Cursor.visible = false;
         if (instance == null)
         {
             instance = this;
@@ -29,10 +30,11 @@ public class PlayerHealthContainer : HealthContainer
     protected override void Die()
     {
         Debug.Log("Player is dead");
-        gameObject.SetActive(false);
+
         //PauseMenu.GetComponent<PauseMenu>().Pause();
 
-        SoundManager.instance.PlaySfx("Victory");
+        SoundManager.instance.PlaySfx("Death");
+        gameObject.SetActive(false);
     }
 
 }
