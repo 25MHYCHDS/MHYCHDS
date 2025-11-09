@@ -31,9 +31,17 @@ public class EnemyHealthContainer : HealthContainer
     {
         Debug.Log($"Enemy {gameObject.name} is dead");
 
-        gameObject.transform.SetParent(e2p.transform, false);
+        if(e2p != null)
+        {
+            gameObject.transform.SetParent(e2p.transform, false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
         PlayerHealthContainer.instance.SetHealth(5);
-        //EnemyCatch.instance.HealthUI.SetActive(false);
+        EnemyCatch.instance.HealthUI.SetActive(false);
         SetHealth(10);
         //SoundManager.instance.PlaySfx("Victory");
     }
