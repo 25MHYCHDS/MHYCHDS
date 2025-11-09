@@ -9,6 +9,7 @@ TagManager:
   - EnemyLookP
   - Character
   - Character2
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX

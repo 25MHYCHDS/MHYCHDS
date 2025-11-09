@@ -28,6 +28,7 @@ public class PlayerReuseableData
     public bool ShouldSprint = false;
     public bool CanNextAttack = true;
     public bool IsLevel0 = false;
+    public bool CanBeDamged = true;
     public string ChagedCharacter;
 
     public Vector3 currenTagetDri;
@@ -37,6 +38,7 @@ public class PlayerReuseableData
 
     public PlayerReuseableData(PlayerMoveStateMachine playerMoveStateMachine)
     {
+
     }
 
     public ref Vector3 CurrenTagetDri

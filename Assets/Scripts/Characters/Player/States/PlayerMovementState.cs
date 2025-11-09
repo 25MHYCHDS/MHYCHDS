@@ -1,18 +1,16 @@
+using AmplifyShaderEditor;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerMovementState : Istate
 {
     protected PlayerMoveStateMachine stateMachine;
     protected PlayerGroundedData GroundedData;
     protected PlayerAirbroneData AirbroneData;
+
+    protected float Dtimer = 0f;
     public PlayerMovementState(PlayerMoveStateMachine playerMoveStateMachine)
     {
         stateMachine = playerMoveStateMachine;
@@ -32,7 +30,7 @@ public class PlayerMovementState : Istate
 
     public virtual void Enter()
     {
-         Debug.Log("State:"+ GetType().Name);
+         //Debug.Log("State:"+ GetType().Name);
 
          AddInputCallBack();
 
@@ -58,6 +56,16 @@ public class PlayerMovementState : Istate
     public virtual void Update()
     {
         JudgeChange();
+        if (!stateMachine.ReuseableData.CanBeDamged)
+        {
+            Dtimer +=Time.deltaTime;
+
+            if (Dtimer > 0.3f)
+            {
+                stateMachine.ReuseableData.CanBeDamged = true;
+                Dtimer = 0f;
+            }
+        }
     }
     public virtual void OnAnimationEnterEvent()
     {
@@ -77,10 +85,15 @@ public class PlayerMovementState : Istate
     {
         if (stateMachine.Player.playerLayerData.IsGroundLayer(collider.gameObject.layer))
         {
-            Debug.Log("受到1点伤害");
-            PlayerHealthContainer.instance.SetHealth(Player.instance.moveStateMachine.ReuseableData.PlayerDefaultHealth--)
+            if (!stateMachine.ReuseableData.CanBeDamged)
+            {
+                return;
+            }
+            PlayerHealthContainer.instance.SetHealth(PlayerHealthContainer.instance.health - 1);
             CameraShake.instance.StartShake();
             HurtRedScreen.instance.PlayEffect();
+
+            stateMachine.ReuseableData.CanBeDamged = false;
             return;
         }
         if(collider.CompareTag("Character") || collider.CompareTag("Character2"))
@@ -99,7 +112,6 @@ public class PlayerMovementState : Istate
 
 
     //功能区————————————————————————————————————————————————————
-
 
     public void UpdateCameraRececnter(Vector2 movementInput)
     {
@@ -223,7 +235,6 @@ public class PlayerMovementState : Istate
         stateMachine.Player.Input.gamePlayActions.Dash.started -= OnDashStart;
 
     }
-
 
     protected virtual void JudgeChange()
     {

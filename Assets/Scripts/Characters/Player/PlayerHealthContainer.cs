@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerHealthContainer : HealthContainer
 {
-    public GameObject PauseMenu;
     public static PlayerHealthContainer instance;
 
     private void Awake()
@@ -30,7 +29,7 @@ public class PlayerHealthContainer : HealthContainer
     protected override void Die()
     {
         Debug.Log("Player is dead");
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         //PauseMenu.GetComponent<PauseMenu>().Pause();
 
         SoundManager.instance.PlaySfx("Victory");

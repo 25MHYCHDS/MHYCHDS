@@ -32,12 +32,16 @@ public class PlayerLightAttackingState : PlayerGroundedState
         if (stateMachine.ReuseableData.LeftMouseClicks == 1)
         {
             AddForce(20);
+            Player.instance.AtteackEffect.gameObject.SetActive(false);
+            Player.instance.AtteackEffect.gameObject.SetActive(true);
         }
         if (stateMachine.ReuseableData.LeftMouseClicks == 2)
         {
             StartAnimation(stateMachine.Player.animationData.Hit2ParameterHash);
             stateMachine.ReuseableData.CanNextAttack = false;
             AddForce(20);
+            Player.instance.AtteackEffect.gameObject.SetActive(false);
+            Player.instance.AtteackEffect.gameObject.SetActive(true);
         }
         if (stateMachine.ReuseableData.LeftMouseClicks == 3)
         {
@@ -45,11 +49,24 @@ public class PlayerLightAttackingState : PlayerGroundedState
             stateMachine.ReuseableData.LeftMouseClicks = 0;
             stateMachine.ReuseableData.CanNextAttack = false;
             AddForce(20);
+            Player.instance.AtteackEffect.gameObject.SetActive(false);
+            Player.instance.AtteackEffect.gameObject.SetActive(true);
         }
     }
 
     public override void Update()
     {
+        if (!stateMachine.ReuseableData.CanBeDamged)
+        {
+            Dtimer += Time.deltaTime;
+
+            if (Dtimer > 0.3f)
+            {
+                stateMachine.ReuseableData.CanBeDamged = true;
+                Dtimer = 0f;
+            }
+        }
+
         IsAiming = Vector3.Distance(CameraManager.instance.EnemyLookPoint.transform.position, Player.instance.transform.position) < MaxDistance;
     }
 
